@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.output/
+.vercel/
+.env
+.env.*
+.DS_Store
+# brainstorm scratchpad (visual companion)
+.superpowers/
