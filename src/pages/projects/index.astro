@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a,b)=> (a.data.order-b.data.order) || (+b.data.date - +a.data.date) || a.id.localeCompare(b.id));
+---
+<BaseLayout title="Projects — Ben Ashdown">
+  <h1>Projects</h1>
+  {items.length === 0
+    ? <p style="color:var(--soft)">Nothing here yet.</p>
+    : <ul style="list-style:none;padding:0;margin:0">{items.map(p => (
+        <li style="border-top:1px solid var(--edge);padding:18px 0">
+          <a href={`/projects/${p.id}`} style="text-decoration:none;color:var(--ink)">
+            <h3 style="margin:0 0 3px">{p.data.title}</h3>
+            <p style="margin:0 0 4px">{p.data.oneLiner}</p>
+            <p style="margin:0;color:var(--soft);font-size:13px">{p.data.outcome}</p>
+          </a>
+        </li>))}</ul>}
+</BaseLayout>
