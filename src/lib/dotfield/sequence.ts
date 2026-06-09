@@ -1,7 +1,11 @@
 export interface Beat { word: string; hold?: number; }
 export interface SequenceOpts {
   beats: Beat[];
-  autoStart: number;                 // index where autoplay begins
+  /**
+   * Index where autoplay begins. Expected `0 <= autoStart <= beats.length`.
+   * `autoStart = 0` means autoplay from the first click (no manual phase).
+   */
+  autoStart: number;
   onWord: (word: string) => void;
   onSettle: () => void;
   setTimer: (fn: () => void, ms: number) => unknown;
