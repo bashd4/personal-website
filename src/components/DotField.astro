@@ -1,0 +1,91 @@
+---
+interface Props { egg?: boolean; }
+const { egg = false } = Astro.props;
+---
+<canvas id="dotfield" aria-hidden="true" data-egg={egg ? '1' : '0'}></canvas>
+<style>
+  #dotfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+</style>
+<script>
+  import { buildLattice, tween, type Dot } from '../lib/dotfield/field';
+  import { createSequence } from '../lib/dotfield/sequence';
+
+  const SAGE = (a:number) => `rgba(111,144,112,${a})`;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('dotfield') as HTMLCanvasElement;
+  const eggOn = canvas?.dataset.egg === '1';
+  if (canvas && !reduce) {
+    const DPR = Math.min(devicePixelRatio || 1, 2);
+    let ctx = canvas.getContext('2d')!, VW = 0, VH = 0, dots: Dot[] = [];
+    const GAP = 16;
+    function size(){ VW=innerWidth; VH=innerHeight; canvas.width=VW*DPR; canvas.height=VH*DPR; canvas.style.width=VW+'px'; canvas.style.height=VH+'px'; ctx=canvas.getContext('2d')!; ctx.setTransform(DPR,0,0,DPR,0,0); }
+    size(); dots = buildLattice(VW, VH, GAP);
+
+    let tStart = performance.now();
+    const snapshot = () => { for (const d of dots){ d.sx=d.x; d.sy=d.y; } tStart=performance.now(); };
+
+    function samplePoints(text:string){
+      const oc=document.createElement('canvas'); oc.width=VW; oc.height=VH; const o=oc.getContext('2d')!;
+      const words=text.split(' '); let lines=[text];
+      if(words.length>2){ const m=Math.ceil(words.length/2); lines=[words.slice(0,m).join(' '), words.slice(m).join(' ')]; }
+      let fs=(VH*0.32)/lines.length; o.font=`600 ${fs}px Georgia`;
+      const mw=Math.max(...lines.map(l=>o.measureText(l).width)); if(mw>VW*0.68) fs*=VW*0.68/mw;
+      o.font=`600 ${fs}px Georgia`; o.fillStyle='#000'; o.textAlign='center'; o.textBaseline='middle';
+      const lh=fs*1.14, sy=VH*0.45-(lines.length-1)*lh/2; lines.forEach((l,i)=>o.fillText(l,VW/2,sy+i*lh));
+      const im=o.getImageData(0,0,VW,VH).data, pts:{x:number,y:number}[]=[];
+      for(let y=0;y<VH;y+=8) for(let x=0;x<VW;x+=8) if(im[(y*VW+x)*4+3]>90) pts.push({x,y});
+      return pts;
+    }
+    function setWord(text:string){
+      const P=samplePoints(text); if(!P.length) return;
+      const order=[...dots.keys()]; for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+      for(let k=0;k<order.length;k++){ const d=dots[order[k]]; if(k<P.length){ d.tx=P[k].x; d.ty=P[k].y; d.at=0.4; } else { d.tx=d.x; d.ty=d.y; d.at=0; } }
+      snapshot();
+    }
+    function rest(){ for(const d of dots){ d.tx=d.hx; d.ty=d.hy; d.at=0.3; } snapshot(); }
+    rest();
+
+    let playing=false;
+    const SEQ=[{word:'hello'},{word:'may i share a story?'},
+      {word:'i',hold:700},{word:'grew',hold:650},{word:'up',hold:650},{word:'taking',hold:750},{word:'things',hold:750},{word:'apart',hold:1300},
+      {word:'(your',hold:900},{word:'real',hold:650},{word:'story',hold:650},{word:'goes',hold:650},{word:'here)',hold:1700}];
+    const seq = createSequence({
+      beats: SEQ, autoStart: 2,
+      onWord: setWord,
+      onSettle: () => { setTimeout(()=>{ playing=false; document.body.classList.remove('egg'); rest(); seq.reset(); }, 1500); },
+      setTimer: (fn,ms)=>setTimeout(fn,ms), clearTimer: (h)=>clearTimeout(h as number),
+    });
+    if (eggOn) {
+      addEventListener('click', (e) => {
+        if ((e.target as HTMLElement)?.closest('a')) return;
+        if (!playing){ playing=true; document.body.classList.add('egg'); }
+        seq.click();
+      });
+    }
+
+    let mx=-999,my=-999,mIn=false;
+    addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; mIn=true; });
+    addEventListener('mouseleave', ()=>{ mIn=false; });
+
+    let hidden=false;
+    document.addEventListener('visibilitychange', ()=>{ hidden=document.hidden; if(!hidden){ tStart=performance.now(); loop(); } });
+    addEventListener('resize', ()=>{ size(); dots=buildLattice(VW,VH,GAP); rest(); });
+
+    const DUR=340;
+    function loop(){
+      if(hidden) return;
+      ctx.clearRect(0,0,VW,VH);
+      const p=Math.min((performance.now()-tStart)/DUR,1);
+      for(const d of dots){ d.x=tween(d.sx,d.tx,p); d.y=tween(d.sy,d.ty,p); d.a += (d.at-d.a)*0.12; }
+      const react=!playing && mIn, R=110;
+      for(const d of dots){
+        if(d.a<0.02) continue;
+        let rx=d.x, ry=d.y, rad=1.6, al=d.a;
+        if(react){ const dx=d.x-mx, dy=d.y-my, dist=Math.hypot(dx,dy)||1; if(dist<R){ const f=1-dist/R; rx=d.x-dx/dist*f*9; ry=d.y-dy/dist*f*9; rad=1.6+f*2.2; al=d.a+f*0.42; } }
+        ctx.beginPath(); ctx.arc(rx,ry,rad,0,7); ctx.fillStyle=SAGE(al); ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+</script>

@@ -1,8 +1,9 @@
 ---
 import Nav from '../components/Nav.astro';
+import DotField from '../components/DotField.astro';
 import '../styles/global.css';
-interface Props { title: string; description?: string; }
-const { title, description = 'Ben Ashdown — software engineer.' } = Astro.props;
+interface Props { title: string; description?: string; egg?: boolean; }
+const { title, description = 'Ben Ashdown — software engineer.', egg = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
@@ -19,7 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:url" content={canonical} />
   </head>
   <body>
-    <!-- DotField canvas mounts here in Task 7 -->
+    <DotField egg={egg} />
     <div class="content">
       <Nav />
       <main class="col"><slot /></main>
