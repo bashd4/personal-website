@@ -13,10 +13,9 @@
   const canvas = document.getElementById('dotfield') as HTMLCanvasElement;
   // module script runs once per load; transition:persist keeps this canvas + loop alive across nav (no re-init)
   if (canvas && !reduce) {
-    const DPR = Math.min(devicePixelRatio || 1, 2);
     let ctx = canvas.getContext('2d')!, VW = 0, VH = 0, dots: Dot[] = [];
     const GAP = 16;
-    function size(){ VW=innerWidth; VH=innerHeight; canvas.width=VW*DPR; canvas.height=VH*DPR; canvas.style.width=VW+'px'; canvas.style.height=VH+'px'; ctx=canvas.getContext('2d')!; ctx.setTransform(DPR,0,0,DPR,0,0); }
+    function size(){ const DPR=Math.min(devicePixelRatio||1,2); VW=innerWidth; VH=innerHeight; canvas.width=VW*DPR; canvas.height=VH*DPR; canvas.style.width=VW+'px'; canvas.style.height=VH+'px'; ctx=canvas.getContext('2d')!; ctx.setTransform(DPR,0,0,DPR,0,0); }
     size(); dots = buildLattice(VW, VH, GAP);
 
     let tStart = performance.now();
@@ -43,26 +42,33 @@
     function rest(){ for(const d of dots){ d.tx=d.hx; d.ty=d.hy; d.at=0.3; } snapshot(); }
     rest();
 
-    let playing=false;
+    let playing=false, settleTimer=0;
     const SEQ=[{word:'hello'},{word:'may i share a story?'},
       {word:'i',hold:700},{word:'grew',hold:650},{word:'up',hold:650},{word:'taking',hold:750},{word:'things',hold:750},{word:'apart',hold:1300},
       {word:'(your',hold:900},{word:'real',hold:650},{word:'story',hold:650},{word:'goes',hold:650},{word:'here)',hold:1700}];
     const seq = createSequence({
       beats: SEQ, autoStart: 2,
       onWord: setWord,
-      onSettle: () => { setTimeout(()=>{ playing=false; document.body.classList.remove('egg'); rest(); seq.reset(); }, 1500); },
+      onSettle: () => { settleTimer = setTimeout(()=>{ playing=false; document.body.classList.remove('egg'); rest(); seq.reset(); }, 1500); },
       setTimer: (fn,ms)=>setTimeout(fn,ms), clearTimer: (h)=>clearTimeout(h as number),
     });
     addEventListener('click', (e) => {
       if (location.pathname !== '/') return;                 // egg lives on the homepage only
-      if ((e.target as HTMLElement)?.closest('a')) return;   // links never trigger it
-      if (!playing){ playing=true; document.body.classList.add('egg'); }
+      const t = e.target as HTMLElement | null;
+      if (t?.closest('a')) return;                           // links never trigger it
+      if (!playing){
+        // only true background clicks start it — not text, nav, or the tail end of a selection
+        if (t?.closest('nav, p, h1, h2, h3, blockquote, cite, time, li')) return;
+        if (getSelection()?.toString()) return;
+        clearTimeout(settleTimer);                           // a fresh run must outlive any stale settle
+        playing=true; document.body.classList.add('egg');
+      }
       seq.click();
     });
 
     let mx=-999,my=-999,mIn=false;
     addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; mIn=true; });
-    addEventListener('mouseleave', ()=>{ mIn=false; });
+    document.addEventListener('mouseleave', ()=>{ mIn=false; }); // mouseleave doesn't reach window
 
     let raf=0, hidden=false, running=false;
     function start(){ if(running) return; running=true; tStart=performance.now(); loop(); }
@@ -70,6 +76,7 @@
     document.addEventListener('visibilitychange', ()=>{ hidden=document.hidden; hidden ? stop() : start(); });
     // if the visitor navigates away mid-egg, cancel it cleanly before the page swaps
     document.addEventListener('astro:before-swap', () => {
+      clearTimeout(settleTimer); // a settle pending at swap time must not fire into a later run
       if (playing) { playing = false; document.body.classList.remove('egg'); rest(); seq.reset(); }
     });
     addEventListener('resize', ()=>{ size(); dots=buildLattice(VW,VH,GAP); if(!playing) rest(); });
