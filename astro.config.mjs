@@ -1,3 +1,3 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-export default defineConfig({ site: 'https://example.com' }); // set real domain later
+export default defineConfig({ site: 'https://benashdown.com' }); // canonical; bashdown.com redirects here
