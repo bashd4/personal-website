@@ -1,7 +1,7 @@
 :root{
   --ink:#2a2722; --soft:#6a6256; --paper:#f5f1e8; --edge:rgba(120,108,90,.18);
   --sage:#6f9070;
-  --font-serif:"Iowan Old Style",Palatino,Georgia,serif; /* swap for chosen serif later */
+  --font-serif:"Lora","Iowan Old Style",Palatino,Georgia,serif;
   --font-sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --measure:64ch;
 }
