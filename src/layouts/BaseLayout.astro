@@ -2,6 +2,8 @@
 import Nav from '../components/Nav.astro';
 import DotField from '../components/DotField.astro';
 import { ClientRouter } from 'astro:transitions';
+import '@fontsource/lora/400.css';
+import '@fontsource/lora/600.css';
 import '../styles/global.css';
 interface Props { title: string; description?: string; }
 const { title, description = 'Ben Ashdown — software engineer.' } = Astro.props;
@@ -12,6 +14,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

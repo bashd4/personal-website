@@ -3,7 +3,10 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=20.3.0", "npm": ">=9.6.5" },
+  "engines": {
+    "node": ">=20.3.0",
+    "npm": ">=9.6.5"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -12,6 +15,13 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "dependencies": { "astro": "^5.6.0" },
-  "devDependencies": { "@astrojs/check": "^0.9.4", "typescript": "^5.6.0", "vitest": "^2.1.0" }
+  "dependencies": {
+    "@fontsource/lora": "^5.2.8",
+    "astro": "^5.6.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
 }

@@ -25,9 +25,10 @@
       const oc=document.createElement('canvas'); oc.width=VW; oc.height=VH; const o=oc.getContext('2d')!;
       const words=text.split(' '); let lines=[text];
       if(words.length>2){ const m=Math.ceil(words.length/2); lines=[words.slice(0,m).join(' '), words.slice(m).join(' ')]; }
-      let fs=(VH*0.32)/lines.length; o.font=`600 ${fs}px Georgia`;
+      const FACE='Lora, Georgia, serif'; // matches --font-serif; Georgia covers a not-yet-loaded webfont
+      let fs=(VH*0.32)/lines.length; o.font=`600 ${fs}px ${FACE}`;
       const mw=Math.max(...lines.map(l=>o.measureText(l).width)); if(mw>VW*0.68) fs*=VW*0.68/mw;
-      o.font=`600 ${fs}px Georgia`; o.fillStyle='#000'; o.textAlign='center'; o.textBaseline='middle';
+      o.font=`600 ${fs}px ${FACE}`; o.fillStyle='#000'; o.textAlign='center'; o.textBaseline='middle';
       const lh=fs*1.14, sy=VH*0.45-(lines.length-1)*lh/2; lines.forEach((l,i)=>o.fillText(l,VW/2,sy+i*lh));
       const im=o.getImageData(0,0,VW,VH).data, pts:{x:number,y:number}[]=[];
       for(let y=0;y<VH;y+=8) for(let x=0;x<VW;x+=8) if(im[(y*VW+x)*4+3]>90) pts.push({x,y});
