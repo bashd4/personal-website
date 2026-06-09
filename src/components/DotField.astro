@@ -1,8 +1,6 @@
 ---
-interface Props { egg?: boolean; }
-const { egg = false } = Astro.props;
 ---
-<canvas id="dotfield" aria-hidden="true" data-egg={egg ? '1' : '0'}></canvas>
+<canvas id="dotfield" aria-hidden="true" transition:persist></canvas>
 <style>
   #dotfield{position:fixed;inset:0;z-index:0;pointer-events:none}
 </style>
@@ -13,7 +11,6 @@ const { egg = false } = Astro.props;
   const SAGE = (a:number) => `rgba(111,144,112,${a})`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('dotfield') as HTMLCanvasElement;
-  const eggOn = canvas?.dataset.egg === '1';
   if (canvas && !reduce) {
     const DPR = Math.min(devicePixelRatio || 1, 2);
     let ctx = canvas.getContext('2d')!, VW = 0, VH = 0, dots: Dot[] = [];
@@ -46,22 +43,21 @@ const { egg = false } = Astro.props;
     rest();
 
     let playing=false;
-    if (eggOn) {
-      const SEQ=[{word:'hello'},{word:'may i share a story?'},
-        {word:'i',hold:700},{word:'grew',hold:650},{word:'up',hold:650},{word:'taking',hold:750},{word:'things',hold:750},{word:'apart',hold:1300},
-        {word:'(your',hold:900},{word:'real',hold:650},{word:'story',hold:650},{word:'goes',hold:650},{word:'here)',hold:1700}];
-      const seq = createSequence({
-        beats: SEQ, autoStart: 2,
-        onWord: setWord,
-        onSettle: () => { setTimeout(()=>{ playing=false; document.body.classList.remove('egg'); rest(); seq.reset(); }, 1500); },
-        setTimer: (fn,ms)=>setTimeout(fn,ms), clearTimer: (h)=>clearTimeout(h as number),
-      });
-      addEventListener('click', (e) => {
-        if ((e.target as HTMLElement)?.closest('a')) return;
-        if (!playing){ playing=true; document.body.classList.add('egg'); }
-        seq.click();
-      });
-    }
+    const SEQ=[{word:'hello'},{word:'may i share a story?'},
+      {word:'i',hold:700},{word:'grew',hold:650},{word:'up',hold:650},{word:'taking',hold:750},{word:'things',hold:750},{word:'apart',hold:1300},
+      {word:'(your',hold:900},{word:'real',hold:650},{word:'story',hold:650},{word:'goes',hold:650},{word:'here)',hold:1700}];
+    const seq = createSequence({
+      beats: SEQ, autoStart: 2,
+      onWord: setWord,
+      onSettle: () => { setTimeout(()=>{ playing=false; document.body.classList.remove('egg'); rest(); seq.reset(); }, 1500); },
+      setTimer: (fn,ms)=>setTimeout(fn,ms), clearTimer: (h)=>clearTimeout(h as number),
+    });
+    addEventListener('click', (e) => {
+      if (location.pathname !== '/') return;                 // egg lives on the homepage only
+      if ((e.target as HTMLElement)?.closest('a')) return;   // links never trigger it
+      if (!playing){ playing=true; document.body.classList.add('egg'); }
+      seq.click();
+    });
 
     let mx=-999,my=-999,mIn=false;
     addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; mIn=true; });
