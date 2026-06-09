@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.order) || a.id.localeCompare(b.id));
+---
+<BaseLayout title="Quotes — Ben Ashdown">
+  <h1>Quotes</h1>
+  {items.length === 0
+    ? <p style="color:var(--soft)">Nothing here yet.</p>
+    : items.map(q => (
+      <blockquote style="border-left:3px solid var(--sage);margin:0 0 22px;padding-left:16px">
+        <p style="font-family:var(--font-serif);font-size:20px;margin:0 0 4px">“{q.data.quote}”</p>
+        <cite style="color:var(--soft);font-size:13px">— {q.data.author}</cite>
+      </blockquote>))}
+</BaseLayout>

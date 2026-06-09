@@ -1,0 +1,17 @@
+:root{
+  --ink:#2a2722; --soft:#6a6256; --paper:#f5f1e8; --edge:rgba(120,108,90,.18);
+  --sage:#6f9070;
+  --font-serif:"Iowan Old Style",Palatino,Georgia,serif; /* swap for chosen serif later */
+  --font-sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --measure:64ch;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-serif);font-weight:600;line-height:1.1;letter-spacing:-.01em}
+a{color:var(--sage);text-underline-offset:3px}
+.col{max-width:720px;margin:0 auto;padding:0 34px}
+:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
+/* layout structure (content sits above the fixed DotField canvas) */
+.content{position:relative;z-index:1}
+main{padding-block:clamp(1.5rem,1rem+3vw,3.5rem) 4rem}
+footer{border-top:1px solid var(--edge);padding-block:1.5rem 3rem;color:var(--soft);font-size:13px}

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Ben Ashdown">
+  <section class="hero">
+    <h1>Ben Ashdown</h1>
+    <p class="role">Software engineer</p>
+    <p class="line">I build things, read more than I should, and keep the words worth keeping. Welcome in.</p>
+    <p class="social"><a href="#">GitHub</a> · <a href="#">LinkedIn</a> · <a href="#">Email</a></p>
+  </section>
+</BaseLayout>
+<style>
+  .hero{min-height:74vh;display:flex;flex-direction:column;justify-content:center;text-align:left;transition:opacity .4s,visibility 0s}
+  /* hero steps aside while the dots tell the story; visibility (after the fade) also drops it from the tab order */
+  body.egg .hero{opacity:.05;pointer-events:none;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+  .hero h1{font-size:clamp(44px,8vw,78px);margin:0;letter-spacing:-.02em}
+  .hero .role{font-family:var(--font-serif);font-size:22px;color:var(--soft);margin:4px 0 18px}
+  .hero .line{font-size:17px;max-width:42ch;margin:0 0 22px}
+  .hero .social{font-size:13px}
+</style>
