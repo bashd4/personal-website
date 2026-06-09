@@ -11,6 +11,7 @@
   const SAGE = (a:number) => `rgba(111,144,112,${a})`;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('dotfield') as HTMLCanvasElement;
+  // module script runs once per load; transition:persist keeps this canvas + loop alive across nav (no re-init)
   if (canvas && !reduce) {
     const DPR = Math.min(devicePixelRatio || 1, 2);
     let ctx = canvas.getContext('2d')!, VW = 0, VH = 0, dots: Dot[] = [];
@@ -67,6 +68,10 @@
     function start(){ if(running) return; running=true; tStart=performance.now(); loop(); }
     function stop(){ running=false; if(raf) cancelAnimationFrame(raf); raf=0; }
     document.addEventListener('visibilitychange', ()=>{ hidden=document.hidden; hidden ? stop() : start(); });
+    // if the visitor navigates away mid-egg, cancel it cleanly before the page swaps
+    document.addEventListener('astro:before-swap', () => {
+      if (playing) { playing = false; document.body.classList.remove('egg'); rest(); seq.reset(); }
+    });
     addEventListener('resize', ()=>{ size(); dots=buildLattice(VW,VH,GAP); if(!playing) rest(); });
 
     const DUR=340;
