@@ -8,3 +8,4 @@ dist/
 .DS_Store
 # brainstorm scratchpad (visual companion)
 .superpowers/
+.vercel

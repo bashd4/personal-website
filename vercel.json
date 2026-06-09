@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "bashdown.com" }], "destination": "https://benashdown.com/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.bashdown.com" }], "destination": "https://benashdown.com/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.benashdown.com" }], "destination": "https://benashdown.com/:path*", "permanent": true }
+  ]
+}
