@@ -78,8 +78,10 @@ off, the site works completely; the dots are simply absent.
 - **Content collections** (Zod-typed) for `projects`, `essays`, `quotes` so adding an item
   is a markdown file, not a code change.
 - **Pages:** `/` (hero), `/projects` (+ detail), `/essays` (+ detail), `/quotes`, `/resume`, `404`.
-- **Astro View Transitions** recommended so the fixed dot field doesn't flash/reset when
-  navigating between pages (keeps the "one continuous skin" feel).
+- **DotField persistence across navigation is a decision point:** a plain Astro MPA reloads
+  each page, re-initializing the canvas. Use **Astro View Transitions** (or a persisted
+  island) so the fixed dot field doesn't flash/reset between pages — confirm the approach
+  during planning. (Re-init per page is acceptable, just less seamless.)
 
 ## Data flow
 Markdown files → Astro content collections (build-time, Zod-validated) → static HTML pages.
@@ -107,6 +109,15 @@ Right-sized for a static content site:
 - **Content collections** — Zod schemas validate at build; a build is the coverage for content.
 - **Manual / visual** — the egg legibility, the ambient reaction feel, reduced-motion path,
   no-JS render, mobile layout.
+
+## Tuning baselines (from the approved prototype — starting points, refine in build)
+- **Dot lattice:** ~16px grid spacing (a few thousand dots at ~1080p); rebuild on resize.
+- **Word formation:** sample letters at ~8px spacing so words are dense enough to read;
+  word dots ~0.4 opacity vs the ambient field ~0.3; same dot radius (~1.6px) as the field.
+- **Transition:** ~340ms, ease-in-out, all dots arriving together.
+- **Autoplay pace:** ~650–800ms per word (short words faster), with a longer beat on the
+  opening lines; settle ~1.5s before fading back to the field.
+- **Ambient cursor reaction:** ~110px radius lens + brighten.
 
 ## Open questions (not blocking the build)
 - The real **serif** typeface choice.
