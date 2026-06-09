@@ -15,6 +15,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
   </head>
   <body>
     <!-- DotField canvas mounts here in Task 7 -->
@@ -23,10 +25,5 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <main class="col"><slot /></main>
       <footer class="col"><p>© 2026 Ben Ashdown · made by hand</p></footer>
     </div>
-    <style>
-      .content{position:relative;z-index:1}
-      main{padding-block:clamp(1.5rem,1rem+3vw,3.5rem) 4rem}
-      footer{border-top:1px solid var(--edge);padding-block:1.5rem 3rem;color:var(--soft);font-size:13px}
-    </style>
   </body>
 </html>
