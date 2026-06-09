@@ -10,10 +10,8 @@ const items = (await getCollection('projects', ({ data }) => !data.draft))
     ? <p style="color:var(--soft)">Nothing here yet.</p>
     : <ul style="list-style:none;padding:0;margin:0">{items.map(p => (
         <li style="border-top:1px solid var(--edge);padding:18px 0">
-          <a href={`/projects/${p.id}`} style="text-decoration:none;color:var(--ink)">
-            <h3 style="margin:0 0 3px">{p.data.title}</h3>
-            <p style="margin:0 0 4px">{p.data.oneLiner}</p>
-            <p style="margin:0;color:var(--soft);font-size:13px">{p.data.outcome}</p>
-          </a>
+          <h2 style="margin:0 0 3px;font-size:19px"><a href={`/projects/${p.id}`} style="text-decoration:none;color:var(--ink)">{p.data.title}</a></h2>
+          <p style="margin:0 0 4px">{p.data.oneLiner}</p>
+          <p style="margin:0;color:var(--soft);font-size:13px">{p.data.outcome}</p>
         </li>))}</ul>}
 </BaseLayout>

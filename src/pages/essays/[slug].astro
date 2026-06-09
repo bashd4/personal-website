@@ -12,7 +12,7 @@ const { Content } = await render(entry);
   <p><a href="/essays">← Essays</a></p>
   <h1>{entry.data.title}</h1>
   <p style="color:var(--soft)">{entry.data.summary}</p>
-  <p style="color:var(--soft);font-size:13px">{entry.data.date.toLocaleDateString('en-GB',{year:'numeric',month:'short'})}</p>
+  <p style="color:var(--soft);font-size:13px"><time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString('en-GB',{year:'numeric',month:'short'})}</time></p>
   <hr style="border:none;border-top:1px solid var(--edge);margin:2rem 0" />
   <Content />
 </BaseLayout>
