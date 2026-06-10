@@ -2,6 +2,7 @@
 quote: I can't be sure I'm getting anywhere when I'm working hard, but I can be sure I'm getting nowhere when I'm not, and it feels awful.
 author: Paul Graham, How to Work Hard
 source: https://paulgraham.com/hwh.html
+encountered: 9 Jun 2026
 commentary: >-
   This quote really unlocked something in my brain. It made me realise that
   when you're consuming things, definitely nothing will happen. By at least
