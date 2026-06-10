@@ -8,8 +8,9 @@ const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.
   {items.length === 0
     ? <p style="color:var(--soft)">Nothing here yet.</p>
     : items.map(q => (
-      <blockquote style="border-left:3px solid var(--sage);margin:0 0 22px;padding-left:16px">
-        <p style="font-family:var(--font-serif);font-size:20px;margin:0 0 4px">“{q.data.quote}”</p>
+      <blockquote style="border-left:3px solid var(--sage);margin:0 0 30px;padding-left:16px">
+        <p style="font-family:var(--font-serif);font-size:20px;margin:0 0 4px;white-space:pre-line">“{q.data.quote}”</p>
         <cite style="color:var(--soft);font-size:13px">— {q.data.author}</cite>
+        {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch">{q.data.commentary}</p>}
       </blockquote>))}
 </BaseLayout>

@@ -29,6 +29,7 @@ const quotes = defineCollection({
   schema: z.object({
     quote: z.string(),
     author: z.string().min(1).default('Ben'),
+    commentary: z.string().optional(), // Ben's own note on why this one is kept
     order: z.number().default(0),
   }),
 });
