@@ -11,9 +11,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 </BaseLayout>
 <style>
-  .hero{min-height:74vh;display:flex;flex-direction:column;justify-content:center;text-align:left;transition:opacity .4s,visibility 0s}
-  /* hero steps aside while the dots tell the story; visibility (after the fade) also drops it from the tab order */
-  body.egg .hero{opacity:.05;pointer-events:none;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+  .hero{min-height:74vh;display:flex;flex-direction:column;justify-content:center;text-align:left}
   .hero .portrait{width:104px;height:104px;border-radius:50%;object-fit:cover;margin:0 0 20px;box-shadow:0 0 0 1px var(--edge),0 1px 8px rgba(42,39,34,.08)}
   .hero h1{font-size:clamp(44px,8vw,78px);margin:0;letter-spacing:-.02em}
   .hero .role{font-family:var(--font-serif);font-size:22px;color:var(--soft);margin:4px 0 18px}

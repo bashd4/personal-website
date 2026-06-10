@@ -19,3 +19,7 @@ const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
         {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch" set:html={emph(q.data.commentary)} />}
       </blockquote>))}
 </BaseLayout>
+<style>
+  /* passages need room to breathe — widen this page's column beyond the prose measure */
+  :global(main.col){max-width:920px}
+</style>

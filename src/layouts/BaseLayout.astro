@@ -1,6 +1,5 @@
 ---
 import Nav from '../components/Nav.astro';
-import DotField from '../components/DotField.astro';
 import { ClientRouter } from 'astro:transitions';
 import '@fontsource/lora/400.css';
 import '@fontsource/lora/600.css';
@@ -25,7 +24,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <ClientRouter />
   </head>
   <body>
-    <DotField />
     <div class="content">
       <Nav />
       <main class="col"><slot /></main>

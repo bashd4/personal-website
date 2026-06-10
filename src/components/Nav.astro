@@ -13,7 +13,8 @@ const active = (h: string) => pathname.startsWith(h);
   <ul>{links.map(l => <li><a href={l.href} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>)}</ul>
 </nav>
 <style>
-  nav{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:baseline;padding:18px 34px;background:var(--paper);box-shadow:0 1px 0 var(--edge)}
+  /* #f8f4eb matches the fixed gradient's top zone, where a sticky nav always sits */
+  nav{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:baseline;padding:18px 34px;background:#f8f4eb;box-shadow:0 1px 0 var(--edge)}
   .brand{font-family:var(--font-serif);font-weight:600;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none}
   ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
   a{color:var(--soft);text-decoration:none;font-size:13px}
