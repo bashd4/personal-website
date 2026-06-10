@@ -15,7 +15,7 @@ const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
         <p style="font-family:var(--font-serif);font-size:20px;margin:0 0 4px;white-space:pre-line">“{q.data.quote}”</p>
         <cite style="color:var(--soft);font-size:13px">— {q.data.source
           ? <a href={q.data.source} style="color:var(--soft)">{q.data.author}</a>
-          : q.data.author}</cite>
+          : q.data.author}{q.data.encountered && <span> · found {q.data.encountered}</span>}</cite>
         {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch" set:html={emph(q.data.commentary)} />}
       </blockquote>))}
 </BaseLayout>
