@@ -30,6 +30,7 @@ const quotes = defineCollection({
     quote: z.string(),
     author: z.string().min(1).default('Ben'),
     commentary: z.string().optional(), // Ben's own note on why this one is kept
+    source: z.string().url().startsWith('https://').optional(), // link to the original, when it lives online
     order: z.number().default(0),
   }),
 });
