@@ -14,7 +14,7 @@
   // module script runs once per load; transition:persist keeps this canvas + loop alive across nav (no re-init)
   if (canvas && !reduce) {
     let ctx = canvas.getContext('2d')!, VW = 0, VH = 0, dots: Dot[] = [];
-    const GAP = 16;
+    const GAP = 20;   // sparser than the original 16 — the field should murmur, not chatter
     function size(){ const DPR=Math.min(devicePixelRatio||1,2); VW=innerWidth; VH=innerHeight; canvas.width=VW*DPR; canvas.height=VH*DPR; canvas.style.width=VW+'px'; canvas.style.height=VH+'px'; ctx=canvas.getContext('2d')!; ctx.setTransform(DPR,0,0,DPR,0,0); }
     size(); dots = buildLattice(VW, VH, GAP);
 
@@ -40,7 +40,7 @@
       for(let k=0;k<order.length;k++){ const d=dots[order[k]]; if(k<P.length){ d.tx=P[k].x; d.ty=P[k].y; d.at=0.4; } else { d.tx=d.x; d.ty=d.y; d.at=0; } }
       snapshot();
     }
-    function rest(){ for(const d of dots){ d.tx=d.hx; d.ty=d.hy; d.at=0.3; } snapshot(); }
+    function rest(){ for(const d of dots){ d.tx=d.hx; d.ty=d.hy; d.at=0.24; } snapshot(); }
     rest();
 
     let playing=false, settleTimer=0;
