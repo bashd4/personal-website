@@ -4,12 +4,9 @@ quote: |-
 author: attributed to Mustafa Kemal Atatürk, 1934
 source: https://www.awm.gov.au/articles/encyclopedia/ataturk
 encountered: in high school, understood in 2022
-commentary: >-
-  This quote, whilst I understand that it may be misattributed, or an
-  invention, is beautiful. The words are so filled with kindness, empathy,
-  reassurance, and understanding — everything I think we should all strive to
-  be. Imagine the heartbreak of every mother, father, sister, brother, and
-  friend who lost someone. This quote must've helped in some small way at
-  least.
+commentary: |-
+  This quote, whilst I understand that it may be misattributed, or an invention, is beautiful. The words are so filled with kindness, empathy, reassurance, and understanding — everything I think we should all strive to be.
+
+  Imagine the heartbreak of every mother, father, sister, brother, and friend who lost someone. This quote must've helped in some small way at least.
 order: 3
 ---

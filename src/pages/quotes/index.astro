@@ -5,6 +5,8 @@ const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.
 // commentary supports _italics_ only — escape everything else, then unwrap the underscores
 const esc = (s: string) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
+// blank lines in the frontmatter become paragraph breaks
+const paras = (s: string) => s.split(/\n{2,}/).map(p => emph(p.trim())).filter(Boolean);
 ---
 <BaseLayout title="Quotes — Ben Ashdown">
   <h1>Quotes</h1>
@@ -16,7 +18,10 @@ const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
         <cite style="color:var(--soft);font-size:13px">— {q.data.source
           ? <a href={q.data.source} style="color:var(--soft)">{q.data.author}</a>
           : q.data.author}{q.data.encountered && <span> · found {q.data.encountered}</span>}</cite>
-        {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch" set:html={emph(q.data.commentary)} />}
+        {q.data.commentary && <div style="margin:14px 0 0">
+          <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin:0 0 4px">My note</p>
+          {paras(q.data.commentary).map(html => <p style="margin:0 0 9px;color:var(--soft);font-size:14px;max-width:56ch" set:html={html} />)}
+        </div>}
       </blockquote>))}
 </BaseLayout>
 <style>
