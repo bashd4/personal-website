@@ -1,5 +1,5 @@
 ---
-title: "Your business model picks your engineering culture"
+title: "Your business model and engineering culture shape each other"
 summary: Why half my Google best-practices checklist went out the window at ClaimKit — unit economics set your technical constraints, and those constraints quietly become your engineering culture.
 date: 2026-06-10
 ---
