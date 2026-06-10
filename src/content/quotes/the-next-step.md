@@ -7,7 +7,7 @@ commentary: >-
   Honestly probably one of the most long-running quotes that run in my head in
   life. I think it's a beautiful thought. It doesn't matter what happened, what
   you did, or what was done to you. The next step is the most important one :).
-  Note this concept is likely quoted in many many places, this is just where I
-  encountered the idea for the first time.
+  (I'm sure this idea exists in a hundred older places — this is just where I
+  met it first.)
 order: 1
 ---
