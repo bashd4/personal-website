@@ -9,7 +9,7 @@
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 /* the warm sheet: light falls from the top of the viewport, fine fibre grain over it */
 body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(120% 90% at 50% 8%, #f8f4eb 0%, #f5f1e8 55%, #eee8da 100%)}
-body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;mix-blend-mode:multiply;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;mix-blend-mode:multiply;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 h1,h2,h3{font-family:var(--font-serif);font-weight:600;line-height:1.1;letter-spacing:-.01em}
 a{color:var(--sage);text-underline-offset:3px}
 .col{max-width:720px;margin:0 auto;padding:0 34px}
