@@ -43,6 +43,7 @@
     function rest(){ for(const d of dots){ d.tx=d.hx; d.ty=d.hy; d.at=0.24; } snapshot(); }
     rest();
 
+    const EGG_ENABLED = false; // easter egg paused for now — flip to true to bring the story back
     let playing=false, settleTimer=0;
     const SEQ=[{word:'hello'},{word:'may i share a story?'},
       {word:'i',hold:700},{word:'grew',hold:650},{word:'up',hold:650},{word:'taking',hold:750},{word:'things',hold:750},{word:'apart',hold:1300},
@@ -54,6 +55,7 @@
       setTimer: (fn,ms)=>setTimeout(fn,ms), clearTimer: (h)=>clearTimeout(h as number),
     });
     addEventListener('click', (e) => {
+      if (!EGG_ENABLED) return;
       if (location.pathname !== '/') return;                 // egg lives on the homepage only
       const t = e.target as HTMLElement | null;
       if (t?.closest('a')) return;                           // links never trigger it
