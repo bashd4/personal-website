@@ -2,6 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.order) || a.id.localeCompare(b.id));
+// commentary supports _italics_ only — escape everything else, then unwrap the underscores
+const esc = (s: string) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
 ---
 <BaseLayout title="Quotes — Ben Ashdown">
   <h1>Quotes</h1>
@@ -13,6 +16,6 @@ const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.
         <cite style="color:var(--soft);font-size:13px">— {q.data.source
           ? <a href={q.data.source} style="color:var(--soft)">{q.data.author}</a>
           : q.data.author}</cite>
-        {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch">{q.data.commentary}</p>}
+        {q.data.commentary && <p style="margin:10px 0 0;color:var(--soft);font-size:14px;max-width:56ch" set:html={emph(q.data.commentary)} />}
       </blockquote>))}
 </BaseLayout>
