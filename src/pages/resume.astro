@@ -1,7 +1,172 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jobs = [
+  {
+    when: 'Jan 2026 – June 2026',
+    role: 'Co-founder & CTO',
+    org: 'ClaimKit (YC F26)',
+    bullets: [
+      'Grew to $100k ARR within 5 months of founding — shipped MVP and reached first revenue within 2 weeks',
+      'Automated the preparation of ~$15M in R&D tax claims for ~30 companies, including fellow YC startups',
+      'Cut claim preparation from weeks of consultant-led work to ~3 hours of customer effort, at 6% pricing vs traditional consultant fees',
+      'Personally designed and built the core product on a 3-person team — an orchestration system coordinating specialised agents for document analysis, R&D assessment, and claim writing, processing hundreds of thousands of pages of customer documentation',
+      'Solely owned all engineering for the company — MCP and third-party platform integrations, agent infrastructure, cloud infrastructure and CI/CD, cost-optimisation systems, and internal claim-assessment tooling',
+    ],
+  },
+  {
+    when: 'May 2025 – Dec 2025',
+    role: 'Co-founder & CTO',
+    org: 'Two early-stage startups',
+    bullets: [
+      'Explored two products — legacy-code modernisation tooling and AI project management for Slack — killed both on weak traction',
+    ],
+  },
+  {
+    when: 'Oct 2021 – May 2025',
+    role: 'Software Engineer',
+    org: 'Google — Flume Efficiency',
+    bullets: [
+      'Improved efficiency of Google’s generic batch processing library (Flume), with a focus on accelerator performance — the library accounts for roughly 26% of Google-wide CPU, 20% of RAM and 14% of Disk I/O',
+      'Created metrics to understand performance of the system on Google’s latest gen TPUs',
+      'Alleviated slow model loading onto TPUs, delivering multi-million-dollar efficiency savings to Google’s Offline Bulk Inference infrastructure',
+      'Discovered and profiled issues specifically related to Accelerated workloads, and undertook several projects to alleviate them, saving millions in compute costs',
+      'Discovered and fixed deep technical issues related to Flume running on Google’s internal job scheduling infrastructure and how signals are surfaced by internal VMs, recovering significant fleet-wide capacity',
+    ],
+  },
+  {
+    when: '',
+    role: 'Software Engineer',
+    org: 'Google — Fabric Design',
+    bullets: [
+      'Developed the software modelling infrastructure producing build blueprints and traffic simulations to validate every new Google data centre fabric design before physical build',
+      'Flexible Apollo NPI — modelled port-level connectivity for flexibly-sized optical circuit switching (OCS) layers, enabling data centres of varying size on shared infrastructure',
+      'With one other engineer, owned all fabric modelling for minicluster — Google’s small-footprint co-location data centres — including mesh bandwidth augmentation for high-bandwidth ML workloads and port allocations for a new Top of Rack switch variant to alleviate supply constraints',
+    ],
+  },
+  {
+    when: 'Dec 2020 – Feb 2021',
+    role: 'Software Development Engineer Intern',
+    org: 'Amazon',
+    bullets: [
+      'Built an event-driven notification system for events and maintenance campaigns on AWS (S3, SNS, SQS, DynamoDB), tracking the full notification lifecycle through to resolution',
+      'Drove design discussions across integrating teams and presented the system to ~30 engineers across sister teams',
+    ],
+  },
+  {
+    when: 'Jan 2020 – July 2020',
+    role: 'Software Intern',
+    org: 'Deswik',
+    bullets: [
+      'Development & maintenance of a .NET based windows application for mine management and scheduling',
+    ],
+  },
+  {
+    when: 'Jul 2019 – Dec 2019',
+    role: 'Technology Intern',
+    org: 'Accenture',
+    bullets: [
+      'Infrastructure & Environments team member',
+      'Produced options papers for secure and scalable hosting solutions and environment solutions that formed part of an organisational change into containerisation',
+      'Developed proof of concept applications for containerised development and developer environment infrastructure',
+    ],
+  },
+];
+
+const projects = [
+  {
+    when: '2020',
+    name: 'Process Isolation in OpenBSD',
+    lang: 'C',
+    bullets: [
+      'Implemented toy “zoning” of processes in OpenBSD',
+      'Processes in different zones could not perform IPC',
+      'Processes in different zones from the user shell could not be seen using utilities such as ps',
+    ],
+  },
+  {
+    when: 'Jul 2018 – Oct 2018',
+    name: 'Spaceport Ai Deep Learning Course',
+    lang: 'Python',
+    bullets: [
+      'Created a character-detection CNN, Dog breed detection CNN, Twitter sentiment analysis RNN',
+    ],
+  },
+  {
+    when: 'Jul 2018 – Nov 2018',
+    name: 'Multiplayer Game',
+    lang: 'Java',
+    bullets: [
+      'Collaborated using Git & GitLab, SonarQube and Jenkins for CI',
+      'Worked on Powerups & Combat features, allowing players to collect, store and use powerups',
+      'Worked on multiplayer networking, focusing on coordinating UI elements across all players (lobby screen, main game, mini-map, player’s health)',
+    ],
+  },
+  {
+    when: 'May 2018 – June 2018',
+    name: 'Frogger Clone',
+    lang: 'C',
+    bullets: [
+      'Built on an atmega324A and displayed on a red/green led matrix, created a fully functional Frogger clone with buttons/ Joystick/ keyboard/ Seven Segment Display',
+    ],
+  },
+];
 ---
 <BaseLayout title="Resume — Ben Ashdown">
   <h1>Resume</h1>
-  <p>The formal version — coming soon.</p>
+  <p class="contact">
+    <a href="mailto:ben@benashdown.com">ben@benashdown.com</a> · <a href="https://github.com/bashd4">github.com/bashd4</a> · U.S. Permanent Resident (ITAR U.S. Person) · Australian Citizen
+    <br /><a class="pdf" href="/Ben-Ashdown-Resume.pdf">Download as PDF</a>
+  </p>
+  <p class="summary">Co-founded a YC startup (F26) that automated ~$15M in R&D tax claims — $100k ARR in five months. Four years at Google: data centre fabric design, then performance engineering for batch data processing spanning ~26% of Google-wide compute.</p>
+
+  <h2>Work Experience</h2>
+  {jobs.map(j => (
+    <section class="entry">
+      <p class="when">{j.when}</p>
+      <div>
+        <h3>{j.role} <span class="org">| {j.org}</span></h3>
+        <ul>{j.bullets.map(b => <li>{b}</li>)}</ul>
+      </div>
+    </section>
+  ))}
+
+  <h2>Education</h2>
+  <section class="entry">
+    <p class="when">2017 – 2021</p>
+    <div>
+      <h3>The University of Queensland <span class="org">| Bachelor of Engineering (Software)</span></h3>
+      <ul>
+        <li>Honours Class I — GPA: 6.6 / 7</li>
+        <li>Deans Commendation for Academic Excellence (×5) | Hawken Scholar</li>
+      </ul>
+    </div>
+  </section>
+
+  <h2>Projects</h2>
+  {projects.map(p => (
+    <section class="entry">
+      <p class="when">{p.when}</p>
+      <div>
+        <h3>{p.name} <span class="org">| {p.lang}</span></h3>
+        <ul>{p.bullets.map(b => <li>{b}</li>)}</ul>
+      </div>
+    </section>
+  ))}
 </BaseLayout>
+<style>
+  .contact{font-size:14px;color:var(--soft);margin:0 0 18px}
+  .pdf{display:inline-block;margin-top:6px}
+  .summary{max-width:60ch;margin:0 0 8px}
+  h2{font-size:22px;margin:34px 0 16px;padding-bottom:6px;border-bottom:1px solid var(--edge)}
+  .entry{display:grid;grid-template-columns:140px 1fr;gap:0 18px;margin:0 0 24px}
+  .when{color:var(--soft);font-size:13px;margin:2px 0 0;white-space:nowrap}
+  h3{font-size:17px;margin:0 0 6px}
+  .org{font-family:var(--font-sans);font-weight:400;color:var(--soft);font-size:15px}
+  ul{margin:0;padding-left:18px}
+  li{font-size:15px;margin:0 0 6px}
+  @media (max-width:600px){
+    .entry{grid-template-columns:1fr}
+    .when{margin:0 0 4px}
+  }
+</style>
