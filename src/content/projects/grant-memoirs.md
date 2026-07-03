@@ -1,12 +1,12 @@
 ---
 title: Ulysses S. Grant's Personal Memoirs
-oneLiner: Grant's life told on a vintage 3D globe — his Personal Memoirs in his own words, battles unfolding from above.
-outcome: Live at history.benashdown.com — seventy chapters of the Memoirs mapped to the places they happened.
+oneLiner: Grant's life told on a vintage 3D globe, in his own words.
+outcome: Seventy chapters of the Memoirs and his Civil War battles, mapped to the places they happened.
 date: 2026-07-02
 order: 1
 link: https://history.benashdown.com
 ---
 
-Grant's Personal Memoirs, told on a vintage 3D globe. Seventy chapters of his life in his own words, each anchored to the place it happened, with his Civil War battles unfolding on the terrain from above.
+You spin a vintage globe. Each chapter flies you to the place Grant is writing about, and his battles open into a top-down view that unfolds on the actual terrain.
 
 Built with React, react-three-fiber, and 3D map tiles.
