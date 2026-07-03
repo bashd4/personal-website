@@ -113,10 +113,12 @@ const projects = [
 ];
 ---
 <BaseLayout title="Resume — Ben Ashdown">
-  <h1>Resume</h1>
+  <div class="head">
+    <h1>Resume</h1>
+    <a class="pdf" href="/Ben-Ashdown-Resume.pdf">Download PDF</a>
+  </div>
   <p class="contact">
     <a href="mailto:ben@benashdown.com">ben@benashdown.com</a> · <a href="https://github.com/bashd4">github.com/bashd4</a> · U.S. Permanent Resident (ITAR U.S. Person) · Australian Citizen
-    <br /><a class="pdf" href="/Ben-Ashdown-Resume.pdf">Download as PDF</a>
   </p>
   <p class="summary">Co-founded a YC startup (F26) that automated ~$15M in R&D tax claims — $100k ARR in five months. Four years at Google: data centre fabric design, then performance engineering for batch data processing spanning ~26% of Google-wide compute.</p>
 
@@ -155,8 +157,13 @@ const projects = [
   ))}
 </BaseLayout>
 <style>
-  .contact{font-size:14px;color:var(--soft);margin:0 0 18px}
-  .pdf{display:inline-block;margin-top:6px}
+  /* the resume needs the wider measure — same as the quotes page */
+  :global(main.col){max-width:920px}
+  .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+  .head h1{margin:0}
+  .pdf{font-size:13px;white-space:nowrap;border:1px solid var(--edge);border-radius:999px;padding:7px 14px;text-decoration:none}
+  .pdf:hover{border-color:var(--sage)}
+  .contact{font-size:14px;color:var(--soft);margin:10px 0 18px}
   .summary{max-width:60ch;margin:0 0 8px}
   h2{font-size:22px;margin:34px 0 16px;padding-bottom:6px;border-bottom:1px solid var(--edge)}
   .entry{display:grid;grid-template-columns:140px 1fr;gap:0 18px;margin:0 0 24px}
