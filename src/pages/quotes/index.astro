@@ -12,7 +12,7 @@ const paras = (s: string) => s.split(/\n{2,}/).map(p => emph(p.trim())).filter(B
   <h1>Quotes</h1>
   {items.length === 0
     ? <p style="color:var(--soft)">Nothing here yet.</p>
-    : items.map(q => (
+    : <div id="quote-list">{items.map(q => (
       <blockquote style="border-left:3px solid var(--sage);margin:0 0 30px;padding-left:16px">
         <p style="font-family:var(--font-serif);font-size:20px;margin:0 0 4px;white-space:pre-line">“{q.data.quote}”</p>
         <cite style="color:var(--soft);font-size:13px">— {q.data.source
@@ -22,7 +22,20 @@ const paras = (s: string) => s.split(/\n{2,}/).map(p => emph(p.trim())).filter(B
           <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin:0 0 4px">My note</p>
           {paras(q.data.commentary).map(html => <p style="margin:0 0 9px;color:var(--soft);font-size:14px;max-width:56ch" set:html={html} />)}
         </div>}
-      </blockquote>))}
+      </blockquote>))}</div>}
+  <!-- each visit deals the quotes in a fresh order; `order` is only the no-JS fallback -->
+  <script is:inline data-astro-rerun>
+    (() => {
+      const list = document.getElementById('quote-list');
+      if (!list) return;
+      const items = [...list.children];
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      list.append(...items);
+    })();
+  </script>
 </BaseLayout>
 <style>
   /* passages need room to breathe — widen this page's column beyond the prose measure */
