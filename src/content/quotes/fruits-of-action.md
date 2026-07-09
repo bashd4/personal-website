@@ -4,5 +4,6 @@ quote: |-
   Let not the fruits of action be your motive, nor let your attachment be to inaction.
 author: Bhagavad Gita, 2.47
 source: https://www.holy-bhagavad-gita.org/chapter/2/verse/47/
+encountered: 9 Jul 2026
 order: 7
 ---
