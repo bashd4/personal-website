@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 const items = (await getCollection('quotes')).sort((a,b)=> (a.data.order-b.data.order) || a.id.localeCompare(b.id));
-// commentary supports _italics_ only — escape everything else, then unwrap the underscores
+// commentary supports _italics_ and [links](https://…) only — escape everything else, then unwrap
 const esc = (s: string) => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const emph = (s: string) => esc(s).replace(/_([^_\n]+)_/g, '<em>$1</em>');
+const emph = (s: string) => esc(s)
+  .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
+  .replace(/_([^_\n]+)_/g, '<em>$1</em>');
 // blank lines in the frontmatter become paragraph breaks
 const paras = (s: string) => s.split(/\n{2,}/).map(p => emph(p.trim())).filter(Boolean);
 ---
