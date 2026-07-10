@@ -1,12 +1,12 @@
 ---
-title: "The $40 million question"
+title: "The $50 million question"
 summary: If I worked on this for 5–10 years and was guaranteed the money, what would I go and do? The answer to that question is why a company shouldn't be a vehicle to wealth.
 date: 2026-07-09
 ---
 
 Packy McCormick's essay [The Company as a Machine for Doing Stuff](https://www.notboring.co/p/the-company-as-a-machine-for-doing) encapsulates a lot of what I felt at ClaimKit. I disagree with the idea of a company as a vehicle to wealth and status. The idea being, once you have wealth and status, you can do what you want!
 
-But the thing that kept circling back to me at ClaimKit was: Ok, if I work on this for the next 5–10 years, and am GUARANTEED (which I know I'm not) 40 million dollars, what would I go and do? I would think to myself: well, I'd spend time with family and friends I guess. I'd travel a bit. I'd buy nice things. That'd entertain me for maybe a couple months. But I know that I would need *something* to do.
+But the thing that kept circling back to me at ClaimKit was: Ok, if I work on this for the next 5–10 years, and am GUARANTEED (which I know I'm not) 50 million dollars, what would I go and do? (That number is roughly real, not pulled from the air: I own 28% today; the couple more rounds it would take to get to an exit would dilute that to maybe 15–17%; and venture-backed exits mostly happen 8–10 years in, at — if you're lucky — a few hundred million. 17% of $300 million is about $50 million, before tax.) I would think to myself: well, I'd spend time with family and friends I guess. I'd travel a bit. I'd buy nice things. That'd entertain me for maybe a couple months. But I know that I would need *something* to do.
 
 So then I thought, what would I like to do with the rest of my time? I would probably want to go work on something cool. Something that brings the future that I want closer. Robotics, Drones, Defense Tech, Heavy Industry, Space. All of these are cool to me.
 
